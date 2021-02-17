@@ -6,6 +6,7 @@
 
 import express from "express";
 import dotenv from "dotenv"; //设置环境变量的插件
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import colors from "colors"; //在db.js中使用 所以放到前面
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
@@ -20,6 +21,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products", productRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(

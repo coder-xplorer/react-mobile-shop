@@ -19,7 +19,8 @@ router.get("/:id", async (req, res) => {
   if (product) {
     res.json(product);
   } else {
-    res.status(404).json({ message: "查询不到产品" });
+    res.status(404);
+    throw new Error("查询不到");
   }
 });
 
